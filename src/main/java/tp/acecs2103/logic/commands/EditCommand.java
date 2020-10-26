@@ -46,11 +46,6 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         TaskList lastShownList = model.getTaskList();
-
-        if (index.getIntIndex() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
         Task taskToEdit = lastShownList.getTask(index.getStrIndex());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
@@ -106,7 +101,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditTaskDescriptor {
-        //private String index;
+        private String index;
         private int weekNumber;
         private String description;
         private LocalDate officialDeadline;
@@ -120,7 +115,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            //setIndex(toCopy.index);
+            setIndex(toCopy.index);
             setWeekNumber(toCopy.weekNumber);
             setDescription(toCopy.description);
             setOfficialDeadline(toCopy.officialDeadline);
@@ -132,15 +127,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(//index,
+            return CollectionUtil.isAnyNonNull(index,
                     weekNumber, description, officialDeadline, customizedDeadline, remark);
         }
 
-        //public void setIndex(String index) {this.index = index;}
+        public void setIndex(String index) {this.index = index;}
 
-        //public Optional<String> getIndex() {
-        //    return Optional.ofNullable(index);
-        //}
+        public Optional<String> getIndex() {
+            return Optional.ofNullable(index);
+        }
 
         public void setWeekNumber(int weekNumber) {
             this.weekNumber = weekNumber;

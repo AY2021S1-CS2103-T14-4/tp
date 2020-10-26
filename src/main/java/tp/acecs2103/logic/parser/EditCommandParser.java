@@ -34,21 +34,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndexObj(argMultimap.getPreamble());
+            index = ParserUtil.parseIndexObj(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     EditCommand.MESSAGE_USAGE), pe);
         }
 
         EditCommand.EditTaskDescriptor editTaskDescriptor = new EditCommand.EditTaskDescriptor();
-        /*
         if (argMultimap.getValue(CliSyntax.PREFIX_INDEX).isPresent()) {
             editTaskDescriptor.setIndex(
                     ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get()));
         }
-        */
-
-
         if (argMultimap.getValue(CliSyntax.PREFIX_WEEKNO).isPresent()) {
             editTaskDescriptor.setWeekNumber(
                     ParserUtil.parseWeekNumber(argMultimap.getValue(CliSyntax.PREFIX_WEEKNO).get()));
