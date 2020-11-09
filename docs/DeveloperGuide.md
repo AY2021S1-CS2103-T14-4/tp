@@ -850,7 +850,9 @@ Mark a task as pending if it is marked as done.
 
 
 ## **Effort**
+
 ###Difficulty level
+
 ####More entities:
 * Compared with AB3 which has one panel for Person, there are four different kinds of tasks (Admin, Topic, Tp, Ip), and four panels to display the tasks with corresponding categories in Ace CS2103 / T.
 
